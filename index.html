@@ -233,6 +233,12 @@ html
       .field-grid, .field-grid.three { grid-template-columns: 1fr; }
     }
 
+    /* PC : boutons Précédent/Suivant en haut ; mobile : en bas */
+    @media (min-width: 769px) {
+      #mainForm { display: flex; flex-direction: column; }
+      #bottomNav { order: -1; margin-top: 0 !important; margin-bottom: 1.5rem; }
+    }
+
     .field { display: flex; flex-direction: column; gap: 6px; }
 
     label.flabel {
