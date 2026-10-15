@@ -6,8 +6,8 @@ html
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Configurer mon agent — Otomizy</title>
-  <meta name="description" content="Configurez votre Agent IA multicanal Otomizy en quelques minutes. Remplissez ce formulaire et nous vous contactons sous 24h." />
-  <link rel="canonical" href="https://otomizy.tn/formulaire" />
+  <meta name="description" content="Configurez votre Agent virtuel intelligent Otomizy en quelques minutes. Remplissez ce formulaire et nous vous contactons sous 24h." />
+  <link rel="canonical" href="https://formulaire.otomizy.tn/" />
 
 <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Cdefs%3E%3ClinearGradient id='gf' x1='0%25' y1='0%25' x2='100%25' y2='100%25'%3E%3Cstop offset='0%25' stop-color='%234f8dff'/%3E%3Cstop offset='100%25' stop-color='%237c3aed'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='100' height='100' rx='22' fill='url(%23gf)'/%3E%3Cpolygon points='58,8 28,55 48,55 42,92 72,45 52,45' fill='white'/%3E%3C/svg%3E" />
 
@@ -470,10 +470,10 @@ html
 
     .success-icon {
       width: 80px; height: 80px;
-      background: linear-gradient(135deg, #4f8dff, #7c3aed);
+      background: linear-gradient(135deg, #22c55e, #16a34a);
       border-radius: 50%; display: flex; align-items: center;
       justify-content: center; font-size: 2rem; margin: 0 auto 1.5rem;
-      box-shadow: 0 8px 30px rgba(79,141,255,0.35);
+      box-shadow: 0 8px 30px rgba(34,197,94,0.4);
     }
 
     .success-screen h2 {
@@ -499,11 +499,7 @@ html
 
 <!-- Nav -->
 <nav>
-  <a href="index.html" class="nav-logo">Otomizy</a>
-  <div style="display:flex; align-items:center; gap:12px;">
-    <a href="index.html#pricing" class="nav-back">← Voir les tarifs</a>
-    <a href="index.html" class="nav-back" style="display:none;" class="md:flex">Accueil</a>
-  </div>
+  <span class="nav-logo">Otomizy</span>
 </nav>
 
 <main style="padding-top: 100px; padding-bottom: 80px;">
@@ -513,13 +509,13 @@ html
     <div class="fade-up" style="text-align:center; margin-bottom: 3rem;">
       <div style="display:inline-flex; align-items:center; gap:8px; padding:7px 18px; border-radius:100px; background:rgba(79,141,255,0.08); border:1px solid rgba(79,141,255,0.2); font-size:0.78rem; font-weight:600; color:#3b6fd4; text-transform:uppercase; letter-spacing:0.08em; margin-bottom:1.25rem;">
         <span style="width:6px;height:6px;border-radius:50%;background:#4f8dff;box-shadow:0 0 6px #4f8dff;animation:pulse 2s infinite;"></span>
-        Configuration de votre Agent IA multicanal
+        Configuration de votre Agent virtuel intelligent
       </div>
       <h1 style="font-family:'Manrope',sans-serif; font-size:clamp(1.8rem,4vw,2.8rem); font-weight:800; letter-spacing:-0.03em; line-height:1.1; margin-bottom:1rem;">
-        Configurez votre<br><span class="text-gradient">Agent IA multicanal</span>
+        Configurez votre<br><span class="text-gradient">Agent virtuel intelligent</span>
       </h1>
       <p style="color:var(--muted); font-size:1rem; line-height:1.7; max-width:500px; margin:0 auto;">
-        Remplissez ce formulaire et nous vous contactons sous <strong style="color:var(--text);">24 heures</strong> pour finaliser la mise en place de votre agent.
+        Remplissez ce formulaire et nous vous contactons sous <strong style="color:var(--text); white-space:nowrap;">24&nbsp;heures</strong> pour finaliser la mise en place de votre agent.
       </p>
     </div>
 
@@ -535,10 +531,8 @@ html
     </div>
 
     <!-- Wizard nav top -->
-    <div id="wizardNav" style="display:flex; align-items:center; justify-content:space-between; margin-bottom:1.5rem; gap:12px;">
-      <button type="button" id="btnPrev" onclick="wizPrev()" class="nav-back" style="visibility:hidden;">← Précédent</button>
+    <div id="wizardNav" style="display:flex; align-items:center; justify-content:center; margin-bottom:1.5rem;">
       <span id="stepCounter" style="font-size:0.8rem; font-weight:600; color:var(--muted); white-space:nowrap;"></span>
-      <button type="button" id="btnNext" onclick="wizNext()" class="btn-primary" style="padding:10px 24px; font-size:0.9rem;">Suivant →</button>
     </div>
 
     <form id="mainForm">
@@ -798,15 +792,16 @@ html
 
       <!-- Submit -->
       <div class="submit-zone" id="submitZone" style="display:none;">
-        <!-- Bottom wizard nav -->
-        <div style="display:flex; align-items:center; justify-content:space-between; margin-bottom:2rem; gap:12px;">
-          <button type="button" onclick="wizPrev()" class="nav-back">← Précédent</button>
-          <span></span>
-        </div>
         <button type="button" onclick="submitForm()" class="btn-primary" id="submitBtn" style="width:100%; max-width:400px; padding:16px 32px; font-size:1rem;">
           ✅ Envoyer ma demande de configuration
         </button>
         <p class="submit-note">Vous serez contacté sous 24h pour finaliser la mise en place de votre agent.</p>
+      </div>
+
+      <!-- Navigation en bas de chaque étape -->
+      <div id="bottomNav" style="display:flex; align-items:center; justify-content:space-between; margin-top:1.5rem; gap:12px;">
+        <button type="button" id="btnPrev" onclick="wizPrev()" class="nav-back" style="visibility:hidden;">← Précédent</button>
+        <button type="button" id="btnNext" onclick="wizNext()" class="btn-primary" style="padding:12px 28px; font-size:0.95rem;">Suivant →</button>
       </div>
 
     </form>
@@ -815,8 +810,7 @@ html
     <div class="success-screen" id="successScreen">
       <div class="success-icon">✓</div>
       <h2>Demande envoyée !</h2>
-      <p>Merci pour votre confiance. Notre équipe analysera vos informations et vous contactera sous <strong style="color:var(--text);">24 heures</strong> pour finaliser la configuration de votre Agent IA multicanal.</p>
-      <a href="index.html" style="display:inline-block;margin-top:2rem;color:var(--accent-blue);font-weight:600;font-size:0.9rem;text-decoration:none;">← Retour à l'accueil</a>
+      <p>Merci pour votre confiance. Notre équipe analysera vos informations et vous contactera sous <strong style="color:var(--text); white-space:nowrap;">24&nbsp;heures</strong> pour finaliser la configuration de votre Agent virtuel intelligent.</p>
     </div>
 
   </div>
@@ -830,7 +824,6 @@ html
       <p style="color:#9ca3af;font-size:0.8rem;">© 2026 Otomizy — Tous droits réservés.</p>
     </div>
     <div style="display:flex;gap:20px;flex-wrap:wrap;">
-      <a href="index.html#mentions-legales" style="color:#9ca3af;font-size:0.8rem;text-decoration:none;">Mentions légales</a>
       <a href="mailto:contact@otomizy.tn" style="color:#9ca3af;font-size:0.8rem;text-decoration:none;">contact@otomizy.tn</a>
     </div>
   </div>
@@ -1076,26 +1069,39 @@ html
 
     // Services
     let servicesText = '';
+    // Une ligne est envoyée dès qu'un de ses champs de texte est rempli
+    const filled = cells => [...cells].some(c => c.type === 'text' && c.value.trim());
+    let n = 0;
     document.querySelectorAll('#servicesTbody tr').forEach(row => {
       const cells = row.querySelectorAll('input, select');
-      if (cells[0]?.value) servicesText += `• ${cells[0].value} | Prix: ${cells[3]?.value||'?'}TND\n`;
+      if (!filled(cells)) return;
+      n++;
+      servicesText += `${n}. ${cells[0].value} | ${cells[1].value} | ${cells[2].value} | Prix: ${cells[3].value||'?'} TND | Disponible: ${cells[4]?.value||''}\n`;
     });
     if (servicesText) formData.append('Services', servicesText);
 
     // FAQ
     let faqText = '';
-    document.querySelectorAll('#faqContainer .faq-item').forEach((item, i) => {
+    n = 0;
+    document.querySelectorAll('#faqContainer .faq-item').forEach(item => {
       const inputs = item.querySelectorAll('input[type="text"], textarea');
-      if (inputs[0]?.value) faqText += `Q${i+1}: ${inputs[0].value}\nR: ${inputs[1]?.value||''}\n\n`;
+      if (!filled([...inputs].map(i => ({ type: 'text', value: i.value })))) return;
+      n++;
+      faqText += `Q${n}: ${inputs[0].value}\nR: ${inputs[1]?.value||''}\n\n`;
     });
     if (faqText) formData.append('FAQ', faqText);
 
-    // RDV
+    // RDV (seulement si l'option est sur « Oui »)
     let rdvText = '';
-    document.querySelectorAll('#rdvTbody tr').forEach(row => {
-      const cells = row.querySelectorAll('input');
-      if (cells[0]?.value) rdvText += `• ${cells[0].value} | ${cells[1]?.value||'?'}min | ${cells[2]?.value||'?'}TND\n`;
-    });
+    n = 0;
+    if (document.querySelector('input[name="rdv"]:checked')?.value === 'oui') {
+      document.querySelectorAll('#rdvTbody tr').forEach(row => {
+        const cells = row.querySelectorAll('input');
+        if (!filled(cells)) return;
+        n++;
+        rdvText += `${n}. ${cells[0].value} | ${cells[1].value||'?'} min | ${cells[2].value||'?'} TND | ${cells[3].value}\n`;
+      });
+    }
     if (rdvText) formData.append('Services RDV', rdvText);
 
     // Notes RDV / livraison (seulement si la section est affichée)
