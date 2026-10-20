@@ -9,23 +9,28 @@ html
   <meta name="description" content="Configurez votre Agent virtuel intelligent Otomizy en quelques minutes. Remplissez ce formulaire et nous vous contactons sous 24h." />
   <link rel="canonical" href="https://formulaire.otomizy.tn/" />
 
-<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Cdefs%3E%3ClinearGradient id='gf' x1='0%25' y1='0%25' x2='100%25' y2='100%25'%3E%3Cstop offset='0%25' stop-color='%234f8dff'/%3E%3Cstop offset='100%25' stop-color='%237c3aed'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='100' height='100' rx='22' fill='url(%23gf)'/%3E%3Cpolygon points='58,8 28,55 48,55 42,92 72,45 52,45' fill='white'/%3E%3C/svg%3E" />
+<link rel="icon" type="image/png" sizes="48x48" href="https://otomizy.tn/favicon-48.png">
+<link rel="icon" type="image/png" sizes="192x192" href="https://otomizy.tn/favicon-192.png">
+<link rel="apple-touch-icon" href="https://otomizy.tn/apple-touch-icon.png">
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
 
   <style>
     :root {
-      --accent-blue: #4f8dff;
-      --accent-violet: #7c3aed;
-      --accent-cyan: #0891b2;
-      --bg: #f8f9fc;
-      --white: #ffffff;
-      --text: #1a1d2e;
-      --muted: #6b7280;
-      --border: #e8ecf4;
+      --accent-blue: #3e8cfd;
+      --accent-violet: #3e8cfd;
+      --accent-cyan: #3e8cfd;
+      --bg: #1e1e1e;
+      --white: #262626;
+      --card-2: #2b2b2b;
+      --text: #ffffff;
+      --muted: #9ca3af;
+      --border: #2a2a2a;
+      --border-strong: #3a3a3a;
+      --glow: rgba(62,140,253,.15);
+      color-scheme: dark;
     }
 
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -33,7 +38,7 @@ html
     body {
       background-color: var(--bg);
       color: var(--text);
-      font-family: 'Inter', sans-serif;
+      font-family: Inter, system-ui, -apple-system, 'Segoe UI', sans-serif;
       -webkit-font-smoothing: antialiased;
       overflow-x: hidden;
     }
@@ -42,37 +47,22 @@ html
       position: fixed;
       inset: 0;
       z-index: -1;
-      background:
-        radial-gradient(ellipse 70% 50% at 5% 5%, rgba(79,141,255,0.08) 0%, transparent 60%),
-        radial-gradient(ellipse 60% 70% at 95% 10%, rgba(124,58,237,0.07) 0%, transparent 60%),
-        radial-gradient(ellipse 60% 40% at 50% 100%, rgba(8,145,178,0.06) 0%, transparent 60%),
-        #f8f9fc;
+      background: radial-gradient(ellipse 60% 40% at 50% 0%, rgba(62,140,253,0.10) 0%, transparent 70%), #1e1e1e;
     }
 
-    .text-gradient {
-      background: linear-gradient(135deg, #4f8dff 0%, #7c3aed 50%, #0891b2 100%);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
-    }
+    .text-gradient { color: var(--accent-blue); }
 
     /* Nav */
     nav {
       position: fixed; top: 0; left: 0; right: 0; z-index: 100;
-      padding: 16px 24px;
-      display: flex; align-items: center; justify-content: space-between;
-      background: rgba(248,249,252,0.85);
-      backdrop-filter: blur(20px);
+      height: 60px;
+      display: flex; align-items: center; justify-content: center;
+      background: rgba(30,30,30,.8);
+      backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px);
       border-bottom: 1px solid var(--border);
     }
 
-    .nav-logo {
-      font-family: 'Manrope', sans-serif;
-      font-weight: 800; font-size: 1.3rem;
-      background: linear-gradient(135deg, #4f8dff, #7c3aed);
-      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
-      background-clip: text; text-decoration: none;
-    }
+    nav img { height: 34px; width: auto; display: block; }
 
     .nav-back {
       display: inline-flex; align-items: center; gap: 8px;
@@ -82,23 +72,24 @@ html
       border: 1px solid var(--border); background: var(--white);
     }
 
-    .nav-back:hover { color: var(--accent-blue); border-color: rgba(79,141,255,0.3); }
+    .nav-back:hover { color: var(--accent-blue); border-color: rgba(62,140,253,0.3); }
 
     /* Buttons */
     .btn-primary {
       display: inline-flex; align-items: center; justify-content: center; gap: 8px;
-      padding: 14px 32px; border-radius: 14px;
-      font-family: 'Manrope', sans-serif; font-weight: 700; font-size: 1rem;
+      padding: 14px 32px; border-radius: .75rem;
+      font-family: Inter, system-ui, sans-serif; font-weight: 700; font-size: 1rem;
       color: #fff;
-      background: linear-gradient(135deg, #4f8dff 0%, #7c3aed 100%);
+      background: var(--accent-blue);
       border: none; cursor: pointer; transition: all 0.3s ease;
-      box-shadow: 0 4px 20px rgba(79,141,255,0.35);
+      box-shadow: 0 0 0 0 var(--glow), 0 10px 30px rgba(62,140,253,0.25);
       text-decoration: none;
     }
 
     .btn-primary:hover {
+      background: #5ba0ff;
       transform: translateY(-2px);
-      box-shadow: 0 8px 30px rgba(79,141,255,0.45);
+      box-shadow: 0 0 0 6px var(--glow), 0 14px 36px rgba(62,140,253,0.35);
     }
 
     .btn-primary:disabled {
@@ -110,7 +101,7 @@ html
       border-radius: 20px;
       background: var(--white);
       border: 1px solid var(--border);
-      box-shadow: 0 2px 16px rgba(0,0,0,0.05);
+      box-shadow: 0 2px 16px rgba(0,0,0,0.25);
     }
 
     /* Progress steps */
@@ -142,7 +133,7 @@ html
     }
 
     .step-item.done:not(:last-child)::after {
-      background: linear-gradient(90deg, #4f8dff, #7c3aed);
+      background: var(--accent-blue);
     }
 
     .step-dot {
@@ -158,14 +149,14 @@ html
     }
 
     .step-item.active .step-dot {
-      background: linear-gradient(135deg, #4f8dff, #7c3aed);
+      background: var(--accent-blue);
       border-color: transparent;
       color: white;
-      box-shadow: 0 4px 12px rgba(79,141,255,0.4);
+      box-shadow: 0 4px 12px rgba(62,140,253,0.4);
     }
 
     .step-item.done .step-dot {
-      background: linear-gradient(135deg, #4f8dff, #7c3aed);
+      background: var(--accent-blue);
       border-color: transparent;
       color: white;
     }
@@ -179,7 +170,7 @@ html
     }
 
     .step-item.active .step-label { color: var(--accent-blue); }
-    .step-item.done .step-label { color: #7c3aed; }
+    .step-item.done .step-label { color: var(--accent-blue); }
 
     /* Section cards */
     .form-section {
@@ -188,11 +179,11 @@ html
       border-radius: 20px;
       padding: 2rem;
       margin-bottom: 1.25rem;
-      box-shadow: 0 2px 16px rgba(0,0,0,0.05);
-      transition: border-color 0.3s;
+      box-shadow: 0 2px 16px rgba(0,0,0,0.25);
+      transition: border-color 0.25s, box-shadow 0.25s;
     }
 
-    .form-section:hover { border-color: rgba(79,141,255,0.25); }
+    .form-section:hover { border-color: rgba(62,140,253,0.5); box-shadow: 0 16px 40px rgba(0,0,0,0.35); }
 
     .section-header {
       display: flex; align-items: center; gap: 14px;
@@ -204,8 +195,8 @@ html
     .section-icon {
       width: 44px; height: 44px;
       border-radius: 12px;
-      background: linear-gradient(135deg, rgba(79,141,255,0.12), rgba(124,58,237,0.08));
-      border: 1px solid rgba(79,141,255,0.2);
+      background: rgba(62,140,253,0.12);
+      border: 1px solid rgba(62,140,253,0.2);
       display: flex; align-items: center; justify-content: center;
       font-size: 20px; flex-shrink: 0;
     }
@@ -270,8 +261,8 @@ html
 
     input:focus, select:focus, textarea:focus {
       border-color: var(--accent-blue);
-      background: var(--white);
-      box-shadow: 0 0 0 3px rgba(79,141,255,0.12);
+      background: var(--card-2);
+      box-shadow: 0 0 0 3px rgba(62,140,253,0.2);
     }
 
     textarea { resize: vertical; min-height: 90px; line-height: 1.6; }
@@ -284,13 +275,13 @@ html
 
     /* Tip banner */
     .tip-banner {
-      background: linear-gradient(135deg, rgba(79,141,255,0.08), rgba(124,58,237,0.06));
-      border: 1px solid rgba(79,141,255,0.2);
+      background: rgba(62,140,253,0.08);
+      border: 1px solid rgba(62,140,253,0.2);
       border-radius: 14px;
       padding: 1.1rem 1.4rem;
       margin-bottom: 2rem;
       display: flex; gap: 12px; align-items: flex-start;
-      font-size: 0.88rem; line-height: 1.6; color: #374151;
+      font-size: 0.88rem; line-height: 1.6; color: #d1d5db;
     }
 
     .tip-banner strong { color: var(--accent-blue); }
@@ -314,7 +305,7 @@ html
     .toggle-wrap input[type="checkbox"] {
       width: 36px; height: 20px;
       appearance: none;
-      background: #cbd5e0;
+      background: #3a3a3a;
       border-radius: 100px;
       position: relative; cursor: pointer;
       transition: background 0.2s;
@@ -330,7 +321,7 @@ html
     }
 
     .toggle-wrap input[type="checkbox"]:checked {
-      background: linear-gradient(135deg, #4f8dff, #7c3aed);
+      background: var(--accent-blue);
     }
 
     .toggle-wrap input[type="checkbox"]:checked::after { left: 18px; }
@@ -365,7 +356,7 @@ html
     }
 
     .dyn-table td input:focus, .dyn-table td select:focus {
-      background: rgba(79,141,255,0.06);
+      background: rgba(62,140,253,0.06);
       box-shadow: none; border-color: transparent;
     }
 
@@ -375,16 +366,16 @@ html
       display: inline-flex; align-items: center; gap: 6px;
       font-family: 'Inter', sans-serif; font-size: 0.82rem; font-weight: 600;
       color: var(--accent-blue);
-      background: rgba(79,141,255,0.06);
-      border: 1px dashed rgba(79,141,255,0.4);
+      background: rgba(62,140,253,0.06);
+      border: 1px dashed rgba(62,140,253,0.4);
       border-radius: 10px; padding: 8px 16px;
       cursor: pointer; transition: all 0.2s;
     }
 
-    .btn-add:hover { background: rgba(79,141,255,0.12); border-color: var(--accent-blue); }
+    .btn-add:hover { background: rgba(62,140,253,0.12); border-color: var(--accent-blue); }
 
     .btn-rm {
-      background: none; border: none; color: #cbd5e0;
+      background: none; border: none; color: #4b5563;
       cursor: pointer; font-size: 18px; line-height: 1;
       padding: 2px 6px; border-radius: 4px; transition: color 0.15s;
     }
@@ -402,7 +393,7 @@ html
       font-size: 0.88rem; transition: all 0.15s;
     }
 
-    .opt:hover { border-color: var(--accent-blue); background: rgba(79,141,255,0.04); }
+    .opt:hover { border-color: var(--accent-blue); background: rgba(62,140,253,0.04); }
     .opt input { accent-color: var(--accent-blue); width: auto; }
 
     /* Plan cards */
@@ -417,12 +408,12 @@ html
       position: relative; background: var(--white);
     }
 
-    .plan-card:hover { border-color: rgba(79,141,255,0.4); }
+    .plan-card:hover { border-color: rgba(62,140,253,0.4); }
 
     .plan-card.selected {
       border-color: var(--accent-blue);
-      background: rgba(79,141,255,0.04);
-      box-shadow: 0 4px 20px rgba(79,141,255,0.12);
+      background: rgba(62,140,253,0.08);
+      box-shadow: 0 4px 20px rgba(62,140,253,0.15);
     }
 
     .plan-card input[type="radio"] { position: absolute; opacity: 0; width: 0; }
@@ -431,9 +422,9 @@ html
       position: absolute; top: -11px; right: 14px;
       display: inline-flex; align-items: center;
       padding: 5px 14px; border-radius: 100px;
-      background: linear-gradient(135deg, #4f8dff, #7c3aed);
+      background: var(--accent-blue);
       font-size: 0.7rem; font-weight: 700; color: white; letter-spacing: 0.05em;
-      box-shadow: 0 4px 12px rgba(79,141,255,0.4);
+      box-shadow: 0 4px 12px rgba(62,140,253,0.4);
     }
 
     .plan-name { font-size: 1rem; font-weight: 700; margin-bottom: 4px; }
@@ -444,7 +435,7 @@ html
     .plan-feats { list-style: none; font-size: 0.82rem; color: var(--muted); display: flex; flex-direction: column; gap: 5px; }
     .plan-feats li { display: flex; align-items: flex-start; gap: 6px; }
     .plan-feats li .ck { color: var(--accent-blue); font-weight: 700; flex-shrink: 0; }
-    .plan-feats li .cx { color: #d1d5db; font-weight: 700; flex-shrink: 0; }
+    .plan-feats li .cx { color: #4b5563; font-weight: 700; flex-shrink: 0; }
 
     /* FAQ item */
     .faq-item {
@@ -471,7 +462,7 @@ html
       background: var(--white);
       border: 1px solid var(--border);
       border-radius: 20px;
-      box-shadow: 0 2px 16px rgba(0,0,0,0.05);
+      box-shadow: 0 2px 16px rgba(0,0,0,0.25);
     }
 
     .success-icon {
@@ -505,19 +496,19 @@ html
 
 <!-- Nav -->
 <nav>
-  <span class="nav-logo">Otomizy</span>
+  <a href="https://otomizy.tn/" aria-label="Otomizy — accueil"><img src="https://otomizy.tn/media/logo-light.png" alt="Otomizy" width="131" height="34"></a>
 </nav>
 
-<main style="padding-top: 100px; padding-bottom: 80px;">
+<main style="padding-top: 112px; padding-bottom: 80px;">
   <div style="max-width: 780px; margin: 0 auto; padding: 0 24px;">
 
     <!-- Page header -->
     <div class="fade-up" style="text-align:center; margin-bottom: 3rem;">
-      <div style="display:inline-flex; align-items:center; gap:8px; padding:7px 18px; border-radius:100px; background:rgba(79,141,255,0.08); border:1px solid rgba(79,141,255,0.2); font-size:0.78rem; font-weight:600; color:#3b6fd4; text-transform:uppercase; letter-spacing:0.08em; margin-bottom:1.25rem;">
-        <span style="width:6px;height:6px;border-radius:50%;background:#4f8dff;box-shadow:0 0 6px #4f8dff;animation:pulse 2s infinite;"></span>
+      <div style="display:inline-flex; align-items:center; gap:8px; padding:7px 18px; border-radius:100px; background:rgba(62,140,253,0.08); border:1px solid rgba(62,140,253,0.2); font-size:0.78rem; font-weight:600; color:#3e8cfd; text-transform:uppercase; letter-spacing:0.08em; margin-bottom:1.25rem;">
+        <span style="width:6px;height:6px;border-radius:50%;background:#3e8cfd;box-shadow:0 0 6px #3e8cfd;animation:pulse 2s infinite;"></span>
         Configuration de votre Agent virtuel intelligent
       </div>
-      <h1 style="font-family:'Manrope',sans-serif; font-size:clamp(1.8rem,4vw,2.8rem); font-weight:800; letter-spacing:-0.03em; line-height:1.1; margin-bottom:1rem;">
+      <h1 style="font-family:Inter,system-ui,sans-serif; font-size:clamp(1.9rem,4.6vw,3rem); font-weight:900; letter-spacing:-0.03em; line-height:1.1; margin-bottom:1rem;">
         Configurez votre<br><span class="text-gradient">Agent virtuel intelligent</span>
       </h1>
       <p style="color:var(--muted); font-size:1rem; line-height:1.7; max-width:500px; margin:0 auto;">
@@ -561,7 +552,7 @@ html
           </div>
           <div class="field">
             <label class="flabel">Secteur d'activité <span class="req">*</span></label>
-            <select name="Secteur" required>
+            <select name="Secteur" required onchange="toggleSecteurAutre()">
               <option value="">— Choisir —</option>
               <option>Centre de beauté / Spa</option>
               <option>Restaurant / Café</option>
@@ -572,6 +563,7 @@ html
               <option>Pharmacie</option>
               <option>Autre</option>
             </select>
+            <input type="text" id="secteurAutre" placeholder="Précisez votre secteur d'activité" maxlength="80" style="display:none;">
           </div>
         </div>
 
@@ -740,6 +732,14 @@ html
             </div>
           </div>
         </div>
+
+        <div class="divider"></div>
+        <div class="field-grid full">
+          <div class="field">
+            <label class="flabel">Notes complémentaires <span class="hint">— optionnel</span></label>
+            <textarea id="notesLiv" placeholder="Une précision sur votre livraison, même si vous avez répondu « Non » : contraintes, cas particuliers, demandes spéciales…" style="min-height:90px;"></textarea>
+          </div>
+        </div>
       </div>
 
       <!-- S6 — RDV -->
@@ -785,12 +785,12 @@ html
           </div>
         </div>
 
-        <div id="notesWrap" style="display:none;">
+        <div id="notesWrap">
           <div class="divider"></div>
           <div class="field-grid full">
             <div class="field">
               <label class="flabel">Notes complémentaires <span class="hint">— optionnel</span></label>
-              <textarea id="notesRdvLiv" placeholder="Autres informations utiles sur vos rendez-vous et votre livraison : contraintes, cas particuliers, demandes spéciales…" style="min-height:90px;"></textarea>
+              <textarea id="notesRdvLiv" placeholder="Une précision sur vos rendez-vous, même si vous avez répondu « Non » : contraintes, cas particuliers, demandes spéciales…" style="min-height:90px;"></textarea>
             </div>
           </div>
         </div>
@@ -823,16 +823,8 @@ html
 </main>
 
 <!-- Footer -->
-<footer style="border-top:1px solid var(--border); padding:32px 24px; margin-top:40px;">
-  <div style="max-width:1200px; margin:0 auto; display:flex; flex-wrap:wrap; justify-content:space-between; align-items:center; gap:16px;">
-    <div>
-      <div style="font-family:'Manrope',sans-serif;font-weight:800;font-size:1.2rem;background:linear-gradient(135deg,#4f8dff,#7c3aed);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;margin-bottom:4px;">Otomizy</div>
-      <p style="color:#9ca3af;font-size:0.8rem;">© 2026 Otomizy — Tous droits réservés.</p>
-    </div>
-    <div style="display:flex;gap:20px;flex-wrap:wrap;">
-      <a href="mailto:contact@otomizy.tn" style="color:#9ca3af;font-size:0.8rem;text-decoration:none;">contact@otomizy.tn</a>
-    </div>
-  </div>
+<footer style="border-top:1px solid var(--border); padding:28px 24px; margin-top:40px; text-align:center; color:var(--muted); font-size:13px;">
+  <p>© 2026 Otomizy · <a href="mailto:contact@otomizy.tn" style="color:var(--muted);text-decoration:none;">contact@otomizy.tn</a></p>
 </footer>
 
 <style>
@@ -875,6 +867,14 @@ html
   }
 
   // ── VALIDATE ─────────────────────────────────────────────────────
+  function toggleSecteurAutre() {
+    const autre = document.querySelector('select[name="Secteur"]').value === 'Autre';
+    const inp = document.getElementById('secteurAutre');
+    inp.style.display = autre ? 'block' : 'none';
+    inp.required = autre;
+    if (autre) inp.focus();
+  }
+
   function validateCurrentStep() {
     const section = getSections()[currentStep];
     const required = section.querySelectorAll('input[required], textarea[required], select[required]');
@@ -1016,20 +1016,13 @@ html
   addFaq(); addFaq(); addFaq();
 
   // ── LIVRAISON / RDV TOGGLES ───────────────────────────────────────
-  function updateNotes() {
-    const on = n => document.querySelector(`input[name="${n}"]:checked`)?.value === 'oui';
-    document.getElementById('notesWrap').style.display = (on('livraison') || on('rdv')) ? 'block' : 'none';
-  }
-
   function toggleLiv(show) {
     document.getElementById('livDetails').style.display = show ? 'block' : 'none';
-    updateNotes();
   }
 
   function toggleRdv(show) {
     document.getElementById('rdvDetails').style.display = show ? 'block' : 'none';
     if (show && document.getElementById('rdvTbody').children.length === 0) { addRdv(); addRdv(); }
-    updateNotes();
   }
 
   // ── RDV ──────────────────────────────────────────────────────────
@@ -1060,6 +1053,12 @@ html
       if (el.type === 'radio') { if (el.checked) formData.append(el.name, el.value); }
       else { formData.append(el.name, el.value || ''); }
     });
+
+    // Secteur personnalisé (option « Autre »)
+    const secteurAutre = document.getElementById('secteurAutre').value.trim();
+    if (document.querySelector('select[name="Secteur"]').value === 'Autre' && secteurAutre) {
+      formData.set('Secteur', 'Autre : ' + secteurAutre);
+    }
 
     // Horaires
     const jours = ['Lundi','Mardi','Mercredi','Jeudi','Vendredi','Samedi','Dimanche'];
@@ -1110,11 +1109,11 @@ html
     }
     if (rdvText) formData.append('Services RDV', rdvText);
 
-    // Notes RDV / livraison (seulement si la section est affichée)
+    // Notes livraison et RDV (toujours disponibles, même si les options sont sur « Non »)
+    const notesLiv = document.getElementById('notesLiv').value.trim();
+    if (notesLiv) formData.append('Notes livraison', notesLiv);
     const notes = document.getElementById('notesRdvLiv').value.trim();
-    if (notes && document.getElementById('notesWrap').style.display !== 'none') {
-      formData.append('Notes RDV et livraison', notes);
-    }
+    if (notes) formData.append('Notes RDV', notes);
 
     // Livraison (détails) et politique d'annulation
     const liv = document.getElementById('livDetails');
