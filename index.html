@@ -411,6 +411,18 @@
     .tone-ex { font-size: 0.8rem; color: var(--muted); line-height: 1.5; font-style: italic; }
     .opt:has(input:checked) { border-color: var(--accent-blue); background: rgba(62,140,253,0.08); }
 
+
+    /* Mots à utiliser / à éviter */
+    .word-cols { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-top: 6px; }
+    @media (max-width: 600px) { .word-cols { grid-template-columns: 1fr; } }
+    .word-col { background: var(--bg); border: 1px solid var(--border); border-radius: 12px; padding: 14px; display: flex; flex-direction: column; gap: 10px; align-items: flex-start; }
+    .word-head { font-size: 0.85rem; font-weight: 700; }
+    .word-head.use { color: #25d366; }
+    .word-head.avoid { color: #ef4444; }
+    .word-col > div[id] { width: 100%; display: flex; flex-direction: column; gap: 8px; }
+    .word-row { display: flex; align-items: center; gap: 6px; }
+    .word-row input { background: var(--white); }
+
     /* Plan cards */
     .plan-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-bottom: 1rem; }
 
@@ -875,10 +887,19 @@
             <span class="field-tip">💡 C'est le meilleur moyen pour que l'agent reprenne votre style, vos expressions et votre façon de saluer</span>
           </div>
         </div>
-        <div class="field-grid full">
-          <div class="field">
-            <label class="flabel">Mots ou phrases à utiliser / à éviter <span class="hint">— optionnel</span></label>
-            <textarea name="Mots à utiliser ou éviter" placeholder="Ex : Toujours dire « Bienvenue chez Bella Spa ». Ne jamais dire « problème », préférer « situation »." style="min-height:80px;"></textarea>
+        <div class="field">
+          <label class="flabel">Mots ou phrases à utiliser / à éviter <span class="hint">— optionnel</span></label>
+          <div class="word-cols">
+            <div class="word-col">
+              <div class="word-head use">✅ À utiliser</div>
+              <div id="wordsUse"></div>
+              <button type="button" class="btn-add" onclick="addWord('wordsUse')">+ Ajouter</button>
+            </div>
+            <div class="word-col">
+              <div class="word-head avoid">❌ À éviter</div>
+              <div id="wordsAvoid"></div>
+              <button type="button" class="btn-add" onclick="addWord('wordsAvoid')">+ Ajouter</button>
+            </div>
           </div>
         </div>
       </div>
@@ -1126,6 +1147,21 @@
     tb.appendChild(tr);
   }
 
+  // ── MOTS À UTILISER / À ÉVITER ───────────────────────────────────
+  const wordHints = {
+    wordsUse: ['Ex : « Bienvenue chez Bella Spa »', 'Ex : « Avec plaisir »', 'Ex : « Je m\'en occupe tout de suite »'],
+    wordsAvoid: ['Ex : « problème »', 'Ex : « malheureusement »', 'Ex : « je ne sais pas »']
+  };
+  function addWord(id) {
+    const box = document.getElementById(id);
+    const hints = wordHints[id];
+    const row = document.createElement('div');
+    row.className = 'word-row';
+    row.innerHTML = `<input type="text" maxlength="120" placeholder="${hints[box.children.length % hints.length]}"><button type="button" class="btn-rm" aria-label="Supprimer" onclick="this.closest('.word-row').remove()">×</button>`;
+    box.appendChild(row);
+  }
+  addWord('wordsUse'); addWord('wordsUse'); addWord('wordsAvoid'); addWord('wordsAvoid');
+
   // ── SUBMIT ───────────────────────────────────────────────────────
   async function submitForm() {
     const btn = document.getElementById('submitBtn');
@@ -1134,20 +1170,26 @@
     btn.style.background = '#9ca3af';
 
     const formData = new FormData();
+    const sections = getSections();
 
-    // Champs nommés (step 1)
-    document.querySelectorAll('#mainForm [name]').forEach(el => {
+    // Champs nommés d'une étape, dans l'ordre de la page
+    const named = idx => sections[idx].querySelectorAll('[name]').forEach(el => {
       if (el.type === 'radio') { if (el.checked) formData.append(el.name, el.value); }
       else { formData.append(el.name, el.value || ''); }
     });
+    // Une ligne est envoyée dès qu'un de ses champs de texte est rempli
+    const filled = cells => [...cells].some(c => c.type === 'text' && c.value.trim());
+    const isYes = n => document.querySelector(`input[name="${n}"]:checked`)?.value === 'oui';
+    let n;
 
-    // Secteur personnalisé (option « Autre »)
+    // ── Étape 1 — Infos
+    named(0);
     const secteurAutre = document.getElementById('secteurAutre').value.trim();
     if (document.querySelector('select[name="Secteur"]').value === 'Autre' && secteurAutre) {
       formData.set('Secteur', 'Autre : ' + secteurAutre);
     }
 
-    // Horaires
+    // ── Étape 2 — Horaires
     const jours = ['Lundi','Mardi','Mercredi','Jeudi','Vendredi','Samedi','Dimanche'];
     let horairesText = '';
     document.querySelectorAll('#horairesGrid .horaire-row').forEach((row, i) => {
@@ -1158,12 +1200,11 @@
         : `${jours[i]}: Fermé\n`;
     });
     formData.append('Horaires', horairesText);
+    named(1);
 
-    // Services
+    // ── Étape 3 — Services
     let servicesText = '';
-    // Une ligne est envoyée dès qu'un de ses champs de texte est rempli
-    const filled = cells => [...cells].some(c => c.type === 'text' && c.value.trim());
-    let n = 0;
+    n = 0;
     document.querySelectorAll('#servicesTbody tr').forEach(row => {
       const cells = row.querySelectorAll('input, select');
       if (!filled(cells)) return;
@@ -1172,7 +1213,7 @@
     });
     if (servicesText) formData.append('Services', servicesText);
 
-    // FAQ
+    // ── Étape 4 — FAQ
     let faqText = '';
     n = 0;
     document.querySelectorAll('#faqContainer .faq-item').forEach(item => {
@@ -1183,37 +1224,42 @@
     });
     if (faqText) formData.append('FAQ', faqText);
 
-    // RDV (seulement si l'option est sur « Oui »)
-    let rdvText = '';
-    n = 0;
-    if (document.querySelector('input[name="rdv"]:checked')?.value === 'oui') {
+    // ── Étape 5 — Livraison (détails seulement si « Oui », note toujours)
+    named(4);
+    if (isYes('livraison')) {
+      const liv = document.getElementById('livDetails');
+      const labels = [...liv.querySelectorAll('.flabel')].map(l => l.textContent.trim());
+      const fields = [...liv.querySelectorAll('input, textarea')];
+      const livText = fields.map((f, i) => f.value ? `${labels[i]}: ${f.value}` : '').filter(Boolean).join('\n');
+      if (livText) formData.append('Détails livraison', livText);
+    }
+    const notesLiv = document.getElementById('notesLiv').value.trim();
+    if (notesLiv) formData.append('Notes livraison', notesLiv);
+
+    // ── Étape 6 — RDV (services et annulation seulement si « Oui », note toujours)
+    named(5);
+    if (isYes('rdv')) {
+      let rdvText = '';
+      n = 0;
       document.querySelectorAll('#rdvTbody tr').forEach(row => {
         const cells = row.querySelectorAll('input');
         if (!filled(cells)) return;
         n++;
         rdvText += `${n}. ${cells[0].value} | ${cells[1].value||'?'} min | ${cells[2].value||'?'} TND | ${cells[3].value}\n`;
       });
+      if (rdvText) formData.append('Services RDV', rdvText);
+      const annul = document.querySelector('#rdvDetails textarea');
+      if (annul?.value.trim()) formData.append('Politique annulation', annul.value.trim());
     }
-    if (rdvText) formData.append('Services RDV', rdvText);
-
-    // Notes livraison et RDV (toujours disponibles, même si les options sont sur « Non »)
-    const notesLiv = document.getElementById('notesLiv').value.trim();
-    if (notesLiv) formData.append('Notes livraison', notesLiv);
     const notes = document.getElementById('notesRdvLiv').value.trim();
     if (notes) formData.append('Notes RDV', notes);
 
-    // Livraison (détails) et politique d'annulation
-    const liv = document.getElementById('livDetails');
-    if (document.querySelector('input[name="livraison"]:checked')?.value === 'oui') {
-      const labels = [...liv.querySelectorAll('.flabel')].map(l => l.textContent.trim());
-      const fields = [...liv.querySelectorAll('input, textarea')];
-      const livText = fields.map((f, i) => f.value ? `${labels[i]}: ${f.value}` : '').filter(Boolean).join('\n');
-      if (livText) formData.append('Détails livraison', livText);
-    }
-    const annul = document.querySelector('#rdvDetails textarea');
-    if (document.querySelector('input[name="rdv"]:checked')?.value === 'oui' && annul?.value) {
-      formData.append('Politique annulation', annul.value);
-    }
+    // ── Étape 7 — Ton du commercial IA
+    named(6);
+    const words = id => [...document.querySelectorAll(`#${id} input`)].map(i => i.value.trim()).filter(Boolean).map(v => '• ' + v).join('\n');
+    const wUse = words('wordsUse'), wAvoid = words('wordsAvoid');
+    if (wUse) formData.append('Mots à utiliser', wUse);
+    if (wAvoid) formData.append('Mots à éviter', wAvoid);
 
     try {
       const response = await fetch('https://formspree.io/f/mdeapzan', {
