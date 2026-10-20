@@ -1,5 +1,3 @@
-html
-
 <!doctype html>
 <html lang="fr">
 <head>
@@ -395,6 +393,23 @@ html
 
     .opt:hover { border-color: var(--accent-blue); background: rgba(62,140,253,0.04); }
     .opt input { accent-color: var(--accent-blue); width: auto; }
+
+
+    /* Ton du commercial IA */
+    .tone-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+    @media (max-width: 500px) { .tone-grid { grid-template-columns: 1fr; } }
+    .tone-card {
+      display: flex; flex-direction: column; gap: 6px;
+      border: 1px solid var(--border); border-radius: var(--radius, .75rem);
+      padding: 14px 16px; cursor: pointer; background: var(--bg);
+      transition: border-color 0.2s, background 0.2s, transform 0.2s;
+    }
+    .tone-card:hover { border-color: rgba(62,140,253,0.5); transform: translateY(-2px); }
+    .tone-card:has(input:checked) { border-color: var(--accent-blue); background: rgba(62,140,253,0.08); box-shadow: 0 4px 20px rgba(62,140,253,0.15); }
+    .tone-card input { position: absolute; opacity: 0; width: 0; height: 0; }
+    .tone-name { font-size: 0.92rem; font-weight: 700; }
+    .tone-ex { font-size: 0.8rem; color: var(--muted); line-height: 1.5; font-style: italic; }
+    .opt:has(input:checked) { border-color: var(--accent-blue); background: rgba(62,140,253,0.08); }
 
     /* Plan cards */
     .plan-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-bottom: 1rem; }
@@ -796,6 +811,78 @@ html
         </div>
       </div>
 
+      <!-- S7 — Ton du commercial IA -->
+      <div class="form-section">
+        <div class="section-header">
+          <div class="section-icon">💬</div>
+          <div>
+            <div class="section-title">Ton du commercial IA <span style="font-size:0.8rem;font-weight:400;color:var(--muted);">— optionnel</span></div>
+            <div class="section-sub">Pour que l'agent écrive à vos clients comme vous le feriez. Tout est déjà pré-rempli, modifiez seulement ce qui vous ressemble.</div>
+          </div>
+        </div>
+
+        <div class="field">
+          <label class="flabel">Ton général</label>
+          <div class="tone-grid" style="margin-top:4px;">
+            <label class="tone-card"><input type="radio" name="Ton" value="Chaleureux" checked><span class="tone-name">😊 Chaleureux</span><span class="tone-ex">« Bonjour ! Avec plaisir, je m'en occupe tout de suite. »</span></label>
+            <label class="tone-card"><input type="radio" name="Ton" value="Professionnel"><span class="tone-name">👔 Professionnel</span><span class="tone-ex">« Bonjour, je vous remercie de votre message. Voici les informations demandées. »</span></label>
+            <label class="tone-card"><input type="radio" name="Ton" value="Décontracté"><span class="tone-name">😎 Décontracté</span><span class="tone-ex">« Salut ! Pas de souci, je te dis ça en 2 secondes. »</span></label>
+            <label class="tone-card"><input type="radio" name="Ton" value="Premium"><span class="tone-name">✨ Premium</span><span class="tone-ex">« Bonjour, ce sera un plaisir de vous accompagner. Permettez-moi de vous présenter nos prestations. »</span></label>
+          </div>
+        </div>
+
+        <div class="field-grid" style="margin-top:1.25rem;">
+          <div class="field">
+            <label class="flabel">Vouvoiement ou tutoiement</label>
+            <div class="opt-group" style="margin-top:4px;">
+              <label class="opt"><input type="radio" name="Vouvoiement ou tutoiement" value="Vouvoiement" checked> Vous</label>
+              <label class="opt"><input type="radio" name="Vouvoiement ou tutoiement" value="Tutoiement"> Tu</label>
+            </div>
+          </div>
+          <div class="field">
+            <label class="flabel">Langue des réponses</label>
+            <div class="opt-group" style="margin-top:4px;">
+              <label class="opt"><input type="radio" name="Langue des réponses" value="Français" checked> Français</label>
+              <label class="opt"><input type="radio" name="Langue des réponses" value="Dialecte tunisien"> Tunisien</label>
+              <label class="opt"><input type="radio" name="Langue des réponses" value="Mélange français / tunisien"> Mélange</label>
+            </div>
+          </div>
+        </div>
+
+        <div class="field-grid">
+          <div class="field">
+            <label class="flabel">Emojis</label>
+            <div class="opt-group" style="margin-top:4px;">
+              <label class="opt"><input type="radio" name="Emojis" value="Jamais"> Jamais</label>
+              <label class="opt"><input type="radio" name="Emojis" value="Un peu" checked> Un peu</label>
+              <label class="opt"><input type="radio" name="Emojis" value="Souvent"> Souvent</label>
+            </div>
+          </div>
+          <div class="field">
+            <label class="flabel">Longueur des réponses</label>
+            <div class="opt-group" style="margin-top:4px;">
+              <label class="opt"><input type="radio" name="Longueur des réponses" value="Courtes" checked> Courtes</label>
+              <label class="opt"><input type="radio" name="Longueur des réponses" value="Détaillées"> Détaillées</label>
+            </div>
+          </div>
+        </div>
+
+        <div class="divider"></div>
+        <div class="field-grid full">
+          <div class="field">
+            <label class="flabel">Vos vrais messages <span class="hint">— optionnel</span></label>
+            <textarea name="Messages réels de l'entreprise" placeholder="Collez ici 3 à 5 messages que vous avez déjà envoyés à vos clients (WhatsApp, Instagram…). L'agent s'en inspirera pour écrire comme vous." style="min-height:130px;"></textarea>
+            <span class="field-tip">💡 C'est le meilleur moyen pour que l'agent reprenne votre style, vos expressions et votre façon de saluer</span>
+          </div>
+        </div>
+        <div class="field-grid full">
+          <div class="field">
+            <label class="flabel">Mots ou phrases à utiliser / à éviter <span class="hint">— optionnel</span></label>
+            <textarea name="Mots à utiliser ou éviter" placeholder="Ex : Toujours dire « Bienvenue chez Bella Spa ». Ne jamais dire « problème », préférer « situation »." style="min-height:80px;"></textarea>
+          </div>
+        </div>
+      </div>
+
       <!-- Submit -->
       <div class="submit-zone" id="submitZone" style="display:none;">
         <button type="button" onclick="submitForm()" class="btn-primary" id="submitBtn" style="width:100%; max-width:400px; padding:16px 32px; font-size:1rem;">
@@ -836,8 +923,8 @@ html
 
 <script>
   // ── WIZARD STATE ──────────────────────────────────────────────────
-  // 6 steps, always in order, no skipping ever
-  const TOTAL_SECTIONS = 6;
+  // 7 steps, always in order, no skipping ever
+  const TOTAL_SECTIONS = 7;
   let currentStep = 0;
   // Track which steps the user has already visited (to color the progress bar)
   const visited = new Set([0]);
@@ -920,7 +1007,7 @@ html
   }
 
   // ── STEPS BAR ────────────────────────────────────────────────────
-  const stepLabels = ['Infos','Horaires','Services','FAQ','Livraison','RDV'];
+  const stepLabels = ['Infos','Horaires','Services','FAQ','Livraison','RDV','Ton'];
   const stepsBar = document.getElementById('stepsBar');
   stepLabels.forEach((lbl, i) => {
     const div = document.createElement('div');
